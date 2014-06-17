@@ -1,0 +1,356 @@
+@font-face {
+    font-family: CaviarDreamsBold;
+    src: url("font2/Caviar Dreams Bold.ttf");
+}
+
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans', sans-serif;
+}
+
+header {
+    width: 100%;
+    background: #e7e7e7;
+    height: 150px;
+}
+
+nav {
+    height: 60px;
+}
+
+header nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+header nav ul li {
+    display: block;
+    width: 60px;
+    float: left;
+
+}
+
+.action {
+    width: 100%;
+    height: 300px;
+    min-height: 300px;
+    background: #527790;/*#efefef; *//* rgba(46, 66, 71, 0.92);*/
+    margin: 0;
+    padding: 0;
+    font-family: CaviarDreamsBold;
+    clear:both;
+    content: "";
+    position: fixed;
+    z-index: 1;
+    color: #fff; /*#a2a2a2;*/
+}
+
+.action h1 {
+    padding-top: 10%;
+    text-align: center;
+    color: #fff; /* #f58025;*/
+    font-size: 2.25em;
+	letter-spacing: .2em;
+	line-height: 1.1em;
+	margin:0px;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+.action .divider {
+    border-top: 2px solid #fff;
+    height: 5px;
+    width: 60%;
+    margin: 15px auto;
+}
+
+.action p {
+    text-align: center;
+    font-size: 18px;
+    font-family: 'Open Sans', sans-serif;
+	font-variant: small-caps;
+    text-transform: none;
+    font-weight: 100;
+    margin-bottom: 0;
+    letter-spacing: 0.2em;
+}
+
+nav {
+    z-index:9999;
+    width: 100%;
+    background: #fff;
+    top: 300px;
+    position: relative;
+}
+
+nav.affix {
+    top: 0;
+}
+
+nav ul {
+    color: #527790;
+    list-style:none;
+    margin:0;
+    padding:0;
+    text-align:center;
+    border-bottom: 2px solid #dfdfdf;
+}
+
+nav ul li {
+    display: inline;
+}
+
+nav ul .active {
+    color: #e1957a;
+}
+
+nav ul a {
+    display: inline-block;
+    color: #527790;
+    text-decoration: none;
+    padding: 20px 30px 20px 30px;
+    letter-spacing: 1px;
+    z-index: 1000;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+nav a:hover {
+    color: #e1957a;
+    background: #fff;
+    text-decoration: none;
+}
+
+.wrapper {
+    width:100%;
+    z-index:999;
+    position: relative;
+
+}
+
+.content-section {
+    z-index:999;
+    background: #fff;
+    min-height: 500px;
+    top: 300px;
+    border: none;
+    position: relative;
+    padding-top: 30px;
+    width: 100%;
+    color: #444;
+
+}
+
+.content-section h1 {
+    font-size: 22px;
+    text-align: center;
+    color: #527790;
+    letter-spacing: 2px;
+    margin: 30px 0px 30px 40px;
+
+}
+.content-section .pull-left {
+    text-align: left;
+}
+
+.content-section .resume .column-left {
+    width: 70%;
+    margin: 0px 20px 20px 40px;
+}
+
+.content-section .resume .column-left .header {
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: bold;
+    width:90%;
+    padding: 12px;
+}
+
+.content-section .resume .column-left .content {
+    font-size: 12px;
+    font-weight: normal;
+    width: 100%;
+    margin: 0 auto;
+    padding: 15px 0px 10px 0px;
+    border-top: 2px solid #dfdfdf;
+    margin-bottom: 40px;
+    color: #444;
+}
+
+.content-section .resume .column-left .content .title {
+    width: 120px;
+    margin: 0 auto;
+    font-weight: bold;
+    font-size: 14px;
+    vertical-align: top;
+    display: inline-block;
+    margin-bottom: 15px;
+    margin-left: 30px;
+}
+
+
+.content-section .resume .column-left .content p {
+    left: 120px;
+    display: inline-block;
+    padding-left: 30px;
+    text-align: left;
+    width: 70%;
+    margin: 0;
+}
+
+.content-section .resume .column-left .content ul {
+    left: 120px;
+    display: inline-block;
+    padding-left: 30px;
+    text-align: left;
+    width: 70%;
+    margin: 0;
+
+}
+
+.content-section .skills {
+}
+
+.content-section .skills .row {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.content-section .skills .column {
+    width: 33.33%;
+    padding-top: 20px;
+    float: left;
+    padding-bottom: 60px;
+}
+
+.content-section .skills .column .header {
+    border-bottom: 2px solid #dfdfdf;
+    padding: 0px 15px 15px 0px;
+    margin: 0 10px 20px 0px;
+}
+
+.content-section .skills .column p {
+    text-align: center;
+}
+
+.content-section h2 {
+    font-size: 18px;
+    text-align: center;
+    letter-spacing: 2px;
+}
+
+.content-section .skills ul {
+    color: #444;
+    font-size: 12px;
+    margin: 0 auto;
+    float: left;
+    padding-left: 20px;
+}
+
+.content-section .skills ul li {
+    padding-top: 5px;
+}
+
+.content-section .interests {
+    width: 100%;
+    margin-top: 60px;
+}
+
+.content-section .interests .row {
+    width: 90%;
+    margin: 0 auto;
+    font-size: 12px;
+}
+
+.content-section .interests .row ul li {
+    padding-bottom: 45px;
+}
+
+.content-section .footer {
+    width: 100%;
+    background: #527790;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.content-section .footer .about {
+    display: inline-block;
+    width: 90%;
+    color: #fff;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.content-section .footer .about h3 {
+    font-size: 16px;
+    letter-spacing: 2px;
+    line-height: 25px;
+    font-weight: bold;
+    width: 50%;
+    margin: 0 auto;
+}
+
+.content-section .footer .about p {
+    color: #dfdfdf;
+    font-size: 12px;
+    width: 35%;
+    margin: 0 auto;
+    margin-top: 25px;
+}
+
+.content-section .footer .about .icons {
+    margin: 15px;
+}
+
+.content-section .footer .about a {
+    color: white;
+    font-size: 24px;
+    padding: 6px;
+}
+.content-section .footer .about a:hover {
+    color: #f58025;
+    text-decoration: none;
+}
+
+/*
+.projects {
+    z-index:999;
+    width: 100%;
+    background: #fff;
+    min-height: 500px;
+    position: absolute;
+    top: 360px;
+    border: none;
+}
+
+.projects h1 {
+    font-size: 22px;
+    text-align: center;
+    color: #527790;
+    letter-spacing: 2px;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+
+.projects .content {
+    width:100%;
+}
+
+.projects .content .thumb {
+    width: 33.33%;
+    float: left;
+    background: #dfdfdf;
+    margin: 0 auto;
+}
+
+.projects .content .thumb img {
+    margin: 0 auto;
+    vertical-align: middle;
+    max-width:100%;
+    height: auto;
+    display: block;
+}*/
