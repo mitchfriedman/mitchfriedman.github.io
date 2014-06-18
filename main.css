@@ -1,8 +1,7 @@
 @font-face {
     font-family: CaviarDreamsBold;
-    src: url("font2/Caviar Dreams Bold.ttf");
+    src: url("font/Caviar Dreams Bold.ttf");
 }
-
 
 body {
     margin: 0;
@@ -37,7 +36,7 @@ header nav ul li {
     width: 100%;
     height: 300px;
     min-height: 300px;
-    background: #527790;/*#efefef; *//* rgba(46, 66, 71, 0.92);*/
+    background: #527790;
     margin: 0;
     padding: 0;
     font-family: CaviarDreamsBold;
@@ -45,13 +44,13 @@ header nav ul li {
     content: "";
     position: fixed;
     z-index: 1;
-    color: #fff; /*#a2a2a2;*/
+    color: #fff; 
 }
 
 .action h1 {
     padding-top: 10%;
     text-align: center;
-    color: #fff; /* #f58025;*/
+    color: #fff;
     font-size: 2.25em;
 	letter-spacing: .2em;
 	line-height: 1.1em;
@@ -149,7 +148,7 @@ nav a:hover {
     text-align: center;
     color: #527790;
     letter-spacing: 2px;
-    margin: 30px 0px 30px 40px;
+    margin: 70px 0px 30px 40px;
 
 }
 .content-section .pull-left {
@@ -229,7 +228,7 @@ nav a:hover {
 .content-section .skills .column .header {
     border-bottom: 2px solid #dfdfdf;
     padding: 0px 15px 15px 0px;
-    margin: 0 10px 20px 0px;
+    margin: 0 10px 40px 0px;
 }
 
 .content-section .skills .column p {
@@ -251,12 +250,18 @@ nav a:hover {
 }
 
 .content-section .skills ul li {
-    padding-top: 5px;
+    padding-top: 15px;
+}
+
+.content-section .skills ul li strong {
+    font-weight: bold;
+    font-size: 14px;
 }
 
 .content-section .interests {
     width: 100%;
-    margin-top: 60px;
+    margin-bottom: 80px;
+    margin-top: 90px;
 }
 
 .content-section .interests .row {
@@ -272,13 +277,14 @@ nav a:hover {
 .content-section .footer {
     width: 100%;
     background: #527790;
-    padding-top: 30px;
-    padding-bottom: 30px;
+    padding-top: 90px;
+    margin-top: 150px;
+    padding-bottom: 60px;
     font-family: 'Open Sans', sans-serif;
 }
 
 .content-section .footer .about {
-    display: inline-block;
+    display: block;
     width: 90%;
     color: #fff;
     margin: 0 auto;
@@ -315,42 +321,3 @@ nav a:hover {
     color: #f58025;
     text-decoration: none;
 }
-
-/*
-.projects {
-    z-index:999;
-    width: 100%;
-    background: #fff;
-    min-height: 500px;
-    position: absolute;
-    top: 360px;
-    border: none;
-}
-
-.projects h1 {
-    font-size: 22px;
-    text-align: center;
-    color: #527790;
-    letter-spacing: 2px;
-    margin-bottom: 30px;
-    margin-top: 30px;
-}
-
-.projects .content {
-    width:100%;
-}
-
-.projects .content .thumb {
-    width: 33.33%;
-    float: left;
-    background: #dfdfdf;
-    margin: 0 auto;
-}
-
-.projects .content .thumb img {
-    margin: 0 auto;
-    vertical-align: middle;
-    max-width:100%;
-    height: auto;
-    display: block;
-}*/

@@ -1,61 +1,31 @@
 <html>
     <head>
         <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-
         <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-
         <link rel="stylesheet" href="css/ico-font.css">
         <link rel="stylesheet" type="text/css" href="main.css" >
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600,400' rel='stylesheet' type='text/css'>
     </head>
 
     <body>
-        <!--<header>
-            <nav>
-                <ul>
-                    <li>Work</li>
-                    <li>About</li>
-                    <li>Contact</li>
-                </ul>
-            </nav>
-        </header>
-    -->
-
         <section class="action" id="action">
             <h1>Mitchell Friedman</h1>
             <div class="divider"></div>
             <p>Programmer and Problem solver</p>
-
-
-            <!--<a href="#">Learn More</a>-->
         </section>
 
         <div class="wrapper">
 
             <nav id="nav">
                 <ul>
-                    <li><a class="active" href="#cv">CV</a></li>
-                    <li><a href="#skills">Skills</a></li>
-                    <li><a href="#interests">Interests</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a id="cvlink" href="#cv" class="active">CV</a></li>
+                    <li><a id="skillslink" href="#skills">Skills</a></li>
+                    <li><a id="interestslink" href="#interests">Interests</a></li>
+                    <li><a id="contactlink" href="#contact">Contact</a></li>
                 </ul>
             </nav>
 
-            <!--
-            <section class="projects">
-                <h1>Recent Projects</h1>
-
-                <div class="content">
-                    <div class="thumb"><img src="img/HUD 1.png"/></div>
-                    <div class="thumb"><img src="http://www.iamtomnewton.com/thumbs/hackney_thumb.jpg"/></div>
-                    <div class="thumb"><img src="http://www.iamtomnewton.com/thumbs/hackney_thumb.jpg"/></div>
-
-                </div>
-
-
-            </section>
-        -->
             <section class="content-section">
                 <h1>Resume / CV</h1>
 
@@ -73,20 +43,17 @@
                             <div class="content">
                                 <div class="title">Street Contxt</div>
                                 <ul>
-                                    <li>blah blah blah blah blahblah
-                                        blah blah blah blah blahblah b</li>
-                                    <li>blah blah blah blah blahblah
-                                        blah blah blah blah blahblah b</li>
+                                    <li>Summer intern developer at financial technology startup in Toronto</li>
+                                    <li>Full stack web development using JavaScript/jQuery, Knockout front-end MVC Framework and Java + PostgreSQL backend with RESTful API integration</li>
+                                    <li>Responsibilities include bug fixes, feature implementation and improving development lifecycle workflow</li>
                                 </ul>
                             </div>
 
                         <div class="content">
-                            <div class="title">Independant Web Developer</div>
+                            <div class="title">Front End Web Developer</div>
                             <ul>
-                                <li>blah blah blah blah blahblah
-                                    blah blah blah blah blahblah b</li>
-                                <li>blah blah blah blah blahblah
-                                    blah blah blah blah blahblah b</li>
+                                <li>Developed website for Independant Game Company using HTML5/CSS3 to showcase the games</li>
+                                <li>Host, maintain and update the content as required in collaboration with the project manager</li>
                             </ul>
                         </div>
                     </div>
@@ -108,28 +75,31 @@
                         <div class="column">
                             <h2 class="header">Major Skills</h2>
                             <ul>
-                                <li>lah blah blah blah blahblah
-                                blah blah blah blah blahblah b</li>
-                                <li>lah blah blah blah blahblah
-                                blah blah blah blah blahblah b</li>
+                                <li><strong>Object Oriented Programming - </strong> Java, C#, Python</li>
+                                <li><strong>MVC architecture and design patterns</strong></li>
+                                <li><strong>Source Version Control - </strong>Git</li>
+                                <li><strong>Problem solving skills</strong></li>
+                                <li><strong>Front-End web development - </strong>HTML5/CSS3</li>
+                                <li><strong>Responsive web development</strong></li>
                             </ul>
                         </div>
                         <div class="column">
                             <h2 class="header">Minor Skills</h2>
                             <ul>
-                                <li>lah blah blah blah blahblah
-                                blahblah b</li>
-                                <li>lah blah blah blah blahblah
-                                blah blah blah blah blahblah b</li>
+                                <li><strong>SQL database and ORM integration</strong></li>
+                                <li><strong>RESTful API development</strong></li>
+                                <li><strong>Scripting languages - </strong>Python, bash</li>
+                                <li><strong>Low level programming - </strong>C</li>
+                                <li><strong>Knockout/Angular front end frameworks</strong></li>
+                                <li><strong>Docker</strong></li>
                             </ul>
                         </div>
                         <div class="column">
                             <h2 class="header">Familiar With</h2>
                             <ul>
-                                <li>hblah
-                                blah blah blah blah blahblah b</li>
-                                <li>lah blah blah blah blahblah
-                                blah blah blah blah blahblah b</li>
+                                <li><strong>Markup languages - </strong>XML/JSON</li>
+                                <li><strong>Datatables table library</strong></li>
+                                <li><strong>Highcharts JavaScript charts library</strong></li>
                             </ul>
                         </div>
                     </div>
@@ -183,22 +153,105 @@
                 </div>
 
             </section>
-
-
-
         </div>
 
     </body>
 
     <script>
      $(document).ready(function(){
+
+         $('#cvlink').click(function(e) {
+            e.preventDefault();
+
+            $('html, body').animate({
+                scrollTop: $('#cv').offset().top - 200
+            }, 500);
+            
+            $("#contactlink").removeClass("active");
+            $("#skillslink").removeClass("active");
+            $("#interestslink").removeClass("active");
+            $("#cvlink").addClass("active");
+
+          });
+
+         $('#skillslink').click(function(e) {
+            e.preventDefault();
+           
+           $('html, body').animate({
+                scrollTop: $("#skills").offset().top - 200
+            }, 500);
+
+            $("#contactlink").removeClass("active");
+            $("#skillslink").addClass("active");
+            $("#interestslink").removeClass("active");
+            $("#cvlink").removeClass("active");
+         });
+
+         $('#interestslink').click(function(e) {
+           e.preventDefault();
+           
+           $('html body').animate({
+                scrollTop: $("#interests").offset().top - 200
+            }, 500);
+
+            $("#contactlink").removeClass("active");
+            $("#skillslink").removeClass("active");
+            $("#interestslink").addClass("active");
+            $("#cvlink").removeClass("active");
+
+         });
+
+         $('#contactlink').click(function(e) {
+            e.preventDefault();
+
+            $('html body').animate({
+                scrollTop: $(window).height() - 200
+            }, 500);
+            
+            $("#contactlink").addClass("active");
+            $("#skillslink").removeClass("active");
+            $("#interestslink").removeClass("active");
+            $("#cvlink").removeClass("active");
+
+         });
+
+         $(window).scroll(function() {
+            var viewY = $(window).scrollTop() + 200;
+
+            if(viewY >= $("#interests").offset().top + 150) {
+                $("#interestslink").removeClass("active");
+                $("#skillslink").removeClass("active");
+                $("#contactlink").addClass("active");
+                $("#cvlink").removeClass("active");
+            }
+            else if(viewY >= $("#interests").offset().top) {
+                $("#interestslink").addClass("active");
+                $("#skillslink").removeClass("active");
+                $("#contactlink").removeClass("active");
+                $("#cvlink").removeClass("active");
+            }
+            else if(viewY >= $("#skills").offset().top) {
+                $("#skillslink").addClass("active");
+                $("#interestslink").removeClass("active");
+                $("#cvlink").removeClass("active");
+                $("#contactlink").removeClass("active");
+            }
+            else if(viewY >= $("#cv").offset().top) {
+                $("#cvlink").addClass("active");
+                $("#skillslink").removeClass("active");
+                $("#interestslink").removeClass("active");
+                $("#contactlink").removeClass("active");
+            }
+         });
+
+
          $('#nav').affix({
             offset: {
-            top: $('#action').height() + $("#nav").height()
+                top: $('#action').height() + $("#nav").height()
             }
           });
 
-          $('body').scrollspy({ target: '#nav' })
+          $('body').scrollspy({ target: '#nav' });
       });
     </script>
 </html>
