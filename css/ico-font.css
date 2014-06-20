@@ -26,6 +26,9 @@
 .icon-github:before {
 	content: "\e600";
 }
+.icon-linkedin:before {
+	content: "\e602";
+}
 .icon-envelope:before {
 	content: "\e601";
 }
