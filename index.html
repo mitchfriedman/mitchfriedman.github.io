@@ -4,7 +4,7 @@
         <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="css/ico-font.css">
-        <link rel="stylesheet" type="text/css" href="main.css" >
+        <link rel="stylesheet" type="text/css" href="css/main.css" >
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600,400' rel='stylesheet' type='text/css'>
         <title>Mitchell Friedman's Portfolio</title>
     </head>
@@ -81,11 +81,12 @@
                 </div>
 
 
-                <h1>Skills</h1>
+                
                 <div class="skills" id="skills">
+                    <h1>Skills</h1>
                     <div class="row">
                         <div class="column">
-                            <h2 class="header">Major Skills</h2>
+                            <h3 class="header">Major Skills</h3>
                             <ul>
                                 <li><strong>Object Oriented Programming - </strong> Java, C#, Python</li>
                                 <li><strong>MVC architecture and design patterns</strong></li>
@@ -98,7 +99,7 @@
                             </ul>
                         </div>
                         <div class="column">
-                            <h2 class="header">Minor Skills</h2>
+                            <h3 class="header">Minor Skills</h3>
                             <ul>
                                 <li><strong>SQL database</strong></li>
                                 <li><strong>RESTful API development and AJAX</strong></li>
@@ -109,7 +110,7 @@
                             </ul>
                         </div>
                         <div class="column">
-                            <h2 class="header">Familiar With</h2>
+                            <h3 class="header">Familiar With</h3>
                             <ul>
                                 <li><strong>Datatables table library</strong></li>
                                 <li><strong>JavaScript charting libraries</strong></li>
@@ -121,8 +122,9 @@
                 </div>
 
 
-                <h1>Interests</h1>
+                
                 <div class="interests" id="interests">
+                    <h1>Interests</h1>
                     <div class="row">
                         <ul>
                             <li>I love playing video games.  I have been an avid gamer since a child and I have grown up on several different games and continue to play games when I have free time.</li>
@@ -161,32 +163,28 @@
     <script>
      $(document).ready(function(){
 
-         $('#cvlink').click(function(e) {
+        $('#cvlink').click(function(e) {
             e.preventDefault();
 
             $('html, body').animate({
                 scrollTop: $('#cv').offset().top - 200
             }, 500);
             
-            $("#contactlink").removeClass("active");
-            $("#skillslink").removeClass("active");
-            $("#interestslink").removeClass("active");
+            removeActiveFromAll();
             $("#cvlink").addClass("active");
 
-          });
+        });
 
-         $('#skillslink').click(function(e) {
+        $('#skillslink').click(function(e) {
             e.preventDefault();
            
            $('html, body').animate({
                 scrollTop: $("#skills").offset().top - 200
             }, 500);
 
-            $("#contactlink").removeClass("active");
+            removeActiveFromAll();
             $("#skillslink").addClass("active");
-            $("#interestslink").removeClass("active");
-            $("#cvlink").removeClass("active");
-         });
+        });
 
          $('#interestslink').click(function(e) {
            e.preventDefault();
@@ -195,55 +193,42 @@
                 scrollTop: $("#interests").offset().top - 200
             }, 500);
 
-            $("#contactlink").removeClass("active");
-            $("#skillslink").removeClass("active");
+            removeActiveFromAll();
             $("#interestslink").addClass("active");
-            $("#cvlink").removeClass("active");
+        });
 
-         });
-
-         $('#contactlink').click(function(e) {
+        $('#contactlink').click(function(e) {
             e.preventDefault();
 
             $('html body').animate({
                 scrollTop: $(window).height() - 200
             }, 500);
             
+            removeActiveFromAll();
             $("#contactlink").addClass("active");
-            $("#skillslink").removeClass("active");
-            $("#interestslink").removeClass("active");
-            $("#cvlink").removeClass("active");
 
          });
 
-         $(window).scroll(function() {
+        $(window).scroll(function() {
             var viewY = $(window).scrollTop() + 200;
 
             if(viewY >= $("#contact").offset().top - 250 ) {
-                $("#interestslink").removeClass("active");
-                $("#skillslink").removeClass("active");
+                removeActiveFromAll();
                 $("#contactlink").addClass("active");
-                $("#cvlink").removeClass("active");
             }
             else if(viewY >= $("#interests").offset().top) {
+                removeActiveFromAll();
                 $("#interestslink").addClass("active");
-                $("#skillslink").removeClass("active");
-                $("#contactlink").removeClass("active");
-                $("#cvlink").removeClass("active");
             }
             else if(viewY >= $("#skills").offset().top) {
+                removeActiveFromAll();
                 $("#skillslink").addClass("active");
-                $("#interestslink").removeClass("active");
-                $("#cvlink").removeClass("active");
-                $("#contactlink").removeClass("active");
             }
             else if(viewY >= $("#cv").offset().top) {
+                removeActiveFromAll();
                 $("#cvlink").addClass("active");
-                $("#skillslink").removeClass("active");
-                $("#interestslink").removeClass("active");
-                $("#contactlink").removeClass("active");
             }
-         });
+        });
 
 
          $('#nav').affix({
@@ -252,7 +237,14 @@
             }
           });
 
-          $('body').scrollspy({ target: '#nav' });
+        function removeActiveFromAll() {
+            $("#cvlink").removeClass("active");
+            $("#skillslink").removeClass("active");
+            $("#interestslink").removeClass("active");
+            $("#contactlink").removeClass("active");
+        }
+
+        $('body').scrollspy({ target: '#nav' });
       });
     </script>
 </html>
