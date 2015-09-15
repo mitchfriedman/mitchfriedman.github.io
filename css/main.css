@@ -333,3 +333,19 @@ nav a:hover {
     color: #f58025;
     text-decoration: none;
 }
+
+.wrapper .writeup {
+    padding-top: 50px;
+    width: 600px;
+    margin: 0 auto;
+}
+
+.wrapper .writeup h3 {
+    font-size: 26px;
+    font-weight: bold;
+    padding-bottom: 30px;
+}
+
+.wrapper .writeup p {
+    
+}

@@ -1,0 +1,81 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="css/ico-font.css">
+        <link rel="stylesheet" type="text/css" href="css/main.css" >
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600,400' rel='stylesheet' type='text/css'>
+        <title>Mitchell Friedman's Workterm1 Writeup</title>
+    </head>
+
+    <body>
+        <div class="wrapper">
+            <div class="writeup">
+                <h3>A Work Report for Co-op Term 1 - By Mitchell Friedman</h3>
+                <h3>Introduction</h3>
+                <p>
+                    Hi there!  My name is Mitchell Friedman, and I am currently enrolled a student at the University of Guelph studying Computer Science.  I am just entering my third year as I write up this blog, so I am about half way through my undergraduate studies. <br><br>
+
+                    I have just completed my first work term as a part of the co-op program here at Guelph, however this was not my first time working as a software developer, as I was fortunate enough to have worked last summer for a software startup in Toronto. <br><br>
+
+                    This summer, however, my experience was very different and I am excited to share it with you! <br><br>
+                </p>
+
+
+                <h3>About the Employer</h3>
+                <p>
+                    I spent my summer working at a software startup in San Francisco called Twilio.  Twilio was founded in 2007 by a group of 3 software engineers, one of which (the CEO, Jeff Lawson), was a previous founder of the famous ticket selling website, StubHub.<br><br>
+
+                    What does Twilio do, you may be asking?  Well, I am hoping at this point the reader has some knowledge of software development, however there are two ways to explain what Twilio does. <br><br> 
+
+                    The first (and pretty technical!) explanation, is that Twilio makes API's for developers to embed cloud communications such as SMS, Voice, WebRTC video/ip messaging into their applications. <br><br> 
+
+                    The second, and much simpler explanation, is that Twilio is the company that powers Uber (and many other customers) text messages. <br><br> 
+
+                    Essentially, Twilio enables developers to make applications that include the ability to send text messages and create phone calls within their app.  I find <a href="http://finance.yahoo.com/news/why-startup-powering-uber-text-162704713.html">this</a> article really makes it clear what Twilio does). <br><br>
+
+                    Twilio has just recently raised a series E round of funding of $130 million and is rapidly growing. For example, within the 12 weeks I spent working there, I saw over 80 new people join the Twilio team, bringing the number of Twilions to around 450.<br><br>
+
+                    Twilio brings a lot of highly technical software principles together to create a handful of awesome products, but in a nutshell I would say that Twilio is really a distributed systems company that takes a micro-service approach to high availability and scalability.<br><br>
+                </p>
+
+                <h3>Job Description</h3>
+                <p>
+                    There are a lot of very interesting engineering teams at Twilio (there's around 20, with new ones popping up frequently), and I joined to be a part of the API team.  This was very exciting for me, since being on the API team at an API company seemed like a great growing and learning opportunity.  The API team at Twilio was very small when I first joined, only 4 full time engineers, and one of them had just joined a couple weeks before me.  By the time I left, we had hired 3 new engineers.<br><br> 
+
+                    This means that for the past couple years, only 3 engineers were responsible for the development and upkeep of an API that processes billions of requests every month from all over the world. <br><br> 
+
+                    The API at Twilio is written in Python with the use of the Flask web application framework.  In fact, the team loves Flask so much they decided to build their own extension for it, Flask-Restful, which they eventually open sourced so the community could benefit as well.<br><br> 
+
+                    In addition to owning the API, the API team also owns a series of helper libraries so users can quickly get started using the Twilio API in the language of their choice.  We helped maintain the open source libraries in Python, PHP Ruby, Java, Node.js, and C#. <br><br> 
+                </p>
+
+                <h3>Goals</h3>
+                <p>
+                    Going into this work term I had a few goals that I wanted to accomplish.  The first is that I wanted to gain experience and see what goes into <b>developing and operating an API</b> at the scale in which Twilio works with, which recently has been billions of requests every month.  Since I was working directly on the API layer at Twilio, creating new endpoints, subdomains, and fixing bugs in existing endpoints, I learned an incredible amount about this.  When I had heard that the API is written in python that definitely seemed interesting to me, since I know from school there's many languages more efficient than python, however after learning about how the API is architected it definitely makes sense. <br><br>
+
+                    This brings me into my second goal, which is that I wanted to learn how to <b>architect and design solutions for problems</b> at scale.  The only problem with this goal is that the API is a stable and well established piece of software, meaning that I wouldn't have a chance to work on a new problem and help design solutions for a <b>new</b> API.  I then realized that if I wanted to learn more about designing software, I would need to take a different approach.  I made sure to ask as many questions as possible to as many engineers as possible.  I also took it upon myself to frequently sit and pick the brain of one of our two software architects on system designs. <br><br> 
+
+                    Another goal I had was to learn more about <b>testing and deployments</b> and how those are done in the industry for maximum reliability and without bringing down the entire system during a new deploy.  As far as testing went, I wrote many automated tests in the form of local unit test, integration tests, and finally cluster level tests.  In terms of learning about deployments, I had a chance to work closely with my team on a project to migrate our servers to a newer version of an Amazon Machine Image (AMI).  I worked with chef to enable our future boxes that we would boot up to be seamless and not cause disruptions when we needed to update our code into production. <br><br> 
+
+                    I also had a chance to work with some incredible interesting and complicated pieces of technology that I didn't know even existed.  For example, in our micro-service architecture, the API is a thin layer that receives requests, parses them, and proxies them to a downstream service that will perform the "business logic" necessary (sending a text, billing someone, etc).  This is all done with the help of HAProxy, which is a highly available http proxy for spreading requests across multiple servers.  In conjunction, we used GEvent, which is a python coroutine based networking library built on top of greenlets, or lightweight threads, to allow for a non-blocking event loop to process asynchronous events easily and efficiently.<br><br> 
+
+                </p>
+
+                <h3>Conclusion</h3>
+                <p>
+                    In conclusion, my experience working at Twilio was incredible and definitely eye opening.  The world of software engineering is incredibly vast, with a ton of opportunities to work on a plethora of different tasks, that in the end come together to make one (or many) amazing products.  In addition to working with very intelligent and experienced developers, I had the chance of a lifetime to make my way out to "The Bay" and make friendships and network with people I never thought I would have a chance to meet. <br><br>  
+
+                    I think that having a chance to work out in the Bay and work on such interesting technology is going to drive me to want to do it again at some point in my life. <br><br>  
+
+                    After this term, I think that my performance in school will be greatly improved as I'm bringing knowledge of distributed systems to Networking and Parallel programming courses, in addition working on real software at scale will help me with the System Analysis and Design in Applications. <br><br>  
+
+                    I just wanted to say thanks for taking the time to read my blog, I hope that you gained valuable insight into what I was doing this summer and some of the things I learned! <br><br>  
+
+                </p>
+            </div>
+        </div>
+    </body>
+</html>
+
