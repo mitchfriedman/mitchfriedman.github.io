@@ -26,7 +26,7 @@ body {
 .action h1 {
     text-align: center;
     color: #F5E9E8;
-    font-size: 3.25em;
+    font-size: 4.25em;
 	letter-spacing: 2px;
     font-weight: normal;
 	margin:0px;
@@ -44,7 +44,7 @@ body {
 
 .action p {
     text-align: center;
-    font-size: 18px;
+    font-size: 24px;
 	font-variant: small-caps;
     text-transform: none;
     font-weight: 100;
