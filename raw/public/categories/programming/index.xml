@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Blogs on Mitchell Friedman</title>
-    <link>/blog/</link>
-    <description>Recent content in Blogs on Mitchell Friedman</description>
+    <title>programming on Mitchell Friedman</title>
+    <link>/categories/programming/</link>
+    <description>Recent content in programming on Mitchell Friedman</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 19 May 2019 16:20:00 +0100</lastBuildDate>
     
-	<atom:link href="/blog/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/categories/programming/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -19,17 +19,6 @@
       <guid>/blog/json-schema/</guid>
       <description>JSON Schema + Go + APIs After working on a few Go HTTP servers i&amp;rsquo;ve noticed a few different patterns for API validations. I&amp;rsquo;m going to attempt to show off yet another way this can be done and hopefully convince you to try out JSON Schema.
 What is JSON Schema? If you haven&amp;rsquo;t heard of JSON Schema before, it&amp;rsquo;s an attempt to apply structure to otherwise unstructured JSON. As developers, sometimes &amp;ldquo;unstructured&amp;rdquo; JSON is incredibly convenient (looking at you postgres), but at some point in the lifecycle of that data, you will need to perform some validation on it.</description>
-    </item>
-    
-    <item>
-      <title>Welcome to my blog</title>
-      <link>/blog/welcome/</link>
-      <pubDate>Sun, 28 Apr 2019 17:56:55 +0100</pubDate>
-      
-      <guid>/blog/welcome/</guid>
-      <description>Brief introduction - i&amp;rsquo;m Mitchell, a software engineer currently living in London.
-I&amp;rsquo;m interesting in Distributed Systems, Go, Python, and building great developer tools to increase productivity.
-I&amp;rsquo;ll share my thoughts on these subjects as things pop into my head.</description>
     </item>
     
   </channel>

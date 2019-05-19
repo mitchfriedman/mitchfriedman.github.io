@@ -3,36 +3,66 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/blog/json-schema/</loc>
+    <lastmod>2019-05-19T16:20:00+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/blog/welcome/</loc>
     <lastmod>2019-04-28T17:56:55+01:00</lastmod>
   </url>
   
   <url>
     <loc>/blog/</loc>
-    <lastmod>2019-04-28T17:56:55+01:00</lastmod>
+    <lastmod>2019-05-19T16:20:00+01:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/categories/</loc>
-    <lastmod>2019-04-28T17:56:55+01:00</lastmod>
+    <lastmod>2019-05-19T16:20:00+01:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/</loc>
-    <lastmod>2019-04-28T17:56:55+01:00</lastmod>
+    <lastmod>2019-05-19T16:20:00+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2019-05-19T16:20:00+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/go/</loc>
+    <lastmod>2019-05-19T16:20:00+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/http/</loc>
+    <lastmod>2019-05-19T16:20:00+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/programming/</loc>
+    <lastmod>2019-05-19T16:20:00+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/server/</loc>
+    <lastmod>2019-05-19T16:20:00+01:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/categories/general/</loc>
     <lastmod>2019-04-28T17:56:55+01:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
     <priority>0</priority>
   </url>
   
