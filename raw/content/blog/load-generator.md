@@ -10,7 +10,8 @@ weight = 10
 
 ## What is load testing?
 From the [wikipedia](https://en.wikipedia.org/wiki/Load_testing), we have one definition of:
-`Load testing is the process of putting demand on a system and measuring its response.`
+
+```Load testing is the process of putting demand on a system and measuring its response.```
 
 This is a pretty straight forward and simple way of putting it, but I like it - throw some load at a service and see what happens. Specifically, when we're talking about load testing HTTP services, some of the things we are looking for are;
 
@@ -69,7 +70,6 @@ We allow users to enter their request bodies with a minimal DSL that supports ge
     city: <randomCity>
     name: <randomName>
 }
-
 ```
 
 and at the time of sending the request we will generate the appropriate random data. This was a commonly requested feature to get around a lot of use cases where perhaps the `name` field is a unique constraint in a database and so all subsequent requests in the Load Tests were not able to accurately perform the workflow of inserting a new item in their database.
