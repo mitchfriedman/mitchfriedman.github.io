@@ -128,8 +128,12 @@
 
 <h2 id="what-is-load-testing">What is load testing?</h2>
 
-<p>From the <a href="https://en.wikipedia.org/wiki/Load_testing">wikipedia</a>, we have one definition of:
-<code>Load testing is the process of putting demand on a system and measuring its response.</code></p>
+<p>From the <a href="https://en.wikipedia.org/wiki/Load_testing">wikipedia</a>, we have one definition of:</p>
+
+<blockquote>
+<p>Load testing is the process of putting demand on a system and
+measuring its response.</p>
+</blockquote>
 
 <p>This is a pretty straight forward and simple way of putting it, but I like it - throw some load at a service and see what happens. Specifically, when we&rsquo;re talking about load testing HTTP services, some of the things we are looking for are;</p>
 
@@ -189,7 +193,6 @@
     city: &lt;randomCity&gt;
     name: &lt;randomName&gt;
 }
-
 </code></pre>
 
 <p>and at the time of sending the request we will generate the appropriate random data. This was a commonly requested feature to get around a lot of use cases where perhaps the <code>name</code> field is a unique constraint in a database and so all subsequent requests in the Load Tests were not able to accurately perform the workflow of inserting a new item in their database.</p>

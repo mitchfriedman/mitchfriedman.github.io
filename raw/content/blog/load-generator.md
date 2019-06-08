@@ -11,7 +11,8 @@ weight = 10
 ## What is load testing?
 From the [wikipedia](https://en.wikipedia.org/wiki/Load_testing), we have one definition of:
 
-```Load testing is the process of putting demand on a system and measuring its response.```
+> Load testing is the process of putting demand on a system and
+> measuring its response.
 
 This is a pretty straight forward and simple way of putting it, but I like it - throw some load at a service and see what happens. Specifically, when we're talking about load testing HTTP services, some of the things we are looking for are;
 
