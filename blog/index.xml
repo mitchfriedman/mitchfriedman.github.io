@@ -31,16 +31,5 @@ This is a pretty straight forward and simple way of putting it, but I like it - 
 What is JSON Schema? If you haven&amp;rsquo;t heard of JSON Schema before, it&amp;rsquo;s an attempt to apply structure to otherwise unstructured JSON. As developers, sometimes &amp;ldquo;unstructured&amp;rdquo; JSON is incredibly convenient (looking at you postgres), but at some point in the lifecycle of that data, you will need to perform some validation on it.</description>
     </item>
     
-    <item>
-      <title>Welcome to my blog</title>
-      <link>/blog/welcome/</link>
-      <pubDate>Sun, 28 Apr 2019 17:56:55 +0100</pubDate>
-      
-      <guid>/blog/welcome/</guid>
-      <description>Brief introduction - i&amp;rsquo;m Mitchell, a software engineer currently living in London.
-I&amp;rsquo;m interesting in Distributed Systems, Go, Python, and building great developer tools to increase productivity.
-I&amp;rsquo;ll share my thoughts on these subjects as things pop into my head.</description>
-    </item>
-    
   </channel>
 </rss>
