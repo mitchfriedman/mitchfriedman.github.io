@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/blog/load-generator/</loc>
+    <lastmod>2019-06-08T13:32:44+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/blog/json-schema/</loc>
     <lastmod>2019-05-19T16:20:00+01:00</lastmod>
   </url>
@@ -14,42 +19,66 @@
   
   <url>
     <loc>/blog/</loc>
-    <lastmod>2019-05-19T16:20:00+01:00</lastmod>
+    <lastmod>2019-06-08T13:32:44+01:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/categories/</loc>
-    <lastmod>2019-05-19T16:20:00+01:00</lastmod>
+    <lastmod>2019-06-08T13:32:44+01:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/</loc>
-    <lastmod>2019-05-19T16:20:00+01:00</lastmod>
+    <lastmod>2019-06-08T13:32:44+01:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/</loc>
-    <lastmod>2019-05-19T16:20:00+01:00</lastmod>
+    <lastmod>2019-06-08T13:32:44+01:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/go/</loc>
-    <lastmod>2019-05-19T16:20:00+01:00</lastmod>
+    <lastmod>2019-06-08T13:32:44+01:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/http/</loc>
-    <lastmod>2019-05-19T16:20:00+01:00</lastmod>
+    <loc>/tags/load-testing/</loc>
+    <lastmod>2019-06-08T13:32:44+01:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/categories/programming/</loc>
+    <lastmod>2019-06-08T13:32:44+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/reliability/</loc>
+    <lastmod>2019-06-08T13:32:44+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/scalability/</loc>
+    <lastmod>2019-06-08T13:32:44+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/vegeta/</loc>
+    <lastmod>2019-06-08T13:32:44+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/http/</loc>
     <lastmod>2019-05-19T16:20:00+01:00</lastmod>
     <priority>0</priority>
   </url>

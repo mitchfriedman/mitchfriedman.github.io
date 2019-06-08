@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta name="generator" content="Hugo 0.55.4" />
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> Load Testing For Everyone </title>
+
+  
+  <meta name="description" content="Load Testing For Everyone"> 
+  
+  
+  
+  
+  
+
+  
+
+  <meta name="author" content="Mitchell Friedman">
+
+
+  <meta property="og:title" content="Load Testing For Everyone" />
+<meta property="og:description" content="Load Testing For Everyone" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/blog/load-generator/" />
+<meta property="article:published_time" content="2019-06-08T13:32:44&#43;01:00"/>
+<meta property="article:modified_time" content="2019-06-08T13:32:44&#43;01:00"/>
+
+  
+
+
+
+
+  
+  
+  
+  
+  
+
+  <link rel="canonical" href="/blog/load-generator/">  
+
+  <link rel="icon" href="/img/favicon.png" type="image/png"/>
+  <link rel="shortcut icon" href="/img/favicon.ico" />
+
+  <link href="/css/font.css" rel="stylesheet" type="text/css">
+  <link href="/css/kube.min.css" rel="stylesheet" type="text/css">
+  <link href="/css/kube.legenda.css" rel="stylesheet" type="text/css">
+  <link href="/css/highlight.css" rel="stylesheet" type="text/css">
+  <link href="/css/master.css" rel="stylesheet" type="text/css">
+  <link href="/css/kube.demo.css" rel="stylesheet" type="text/css">
+
+ <link href="/css/custom.css" rel="stylesheet" type="text/css">
+
+  <script src="/js/jquery-2.1.4.min.js" type="text/javascript">
+  </script>
+
+  <script type="text/javascript" src="/js/tocbot.min.js"></script>
+</head>
+
+
+<body class="page-kube">
+  <header> <div class="show-sm">
+    <div id="nav-toggle-box">
+      <div id="nav-toggle-brand">
+        <a href="/">Mitchell Friedman</a>
+      </div><a data-component="toggleme" data-target="#top" href="#" id="nav-toggle"><i class="kube-menu"></i></a>
+    </div>
+  </div>
+  <div class="hide-sm" id="top">
+    <div id="top-brand">
+      <a href="/" title="home">Mitchell Friedman</a>
+    </div>
+    <nav id="top-nav-main">
+      <ul>
+       
+       
+    <li><a href="/" >Home</a></li>
+    
+    <li><a href="/blog/" >Blog</a></li>
+    
+      </ul>
+    </nav>
+    <nav id="top-nav-extra"> 
+      <ul>
+          
+      </ul>
+    </nav>
+  </div>
+ </header>
+  <main>
+<div class="push-center" itemscope itemtype="http://schema.org/BlogPosting">
+    
+<meta itemprop="name" content="Load Testing For Everyone">
+<meta itemprop="description" content="Load Testing For Everyone">
+
+
+<meta itemprop="datePublished" content="2019-06-08T13:32:44&#43;01:00" />
+<meta itemprop="dateModified" content="2019-06-08T13:32:44&#43;01:00" />
+<meta itemprop="wordCount" content="1415">
+
+
+
+<meta itemprop="keywords" content="go,vegeta,load testing,reliability,scalability," />
+
+<div id="hero">
+    <h1 itemprop="headline">  Load Testing For Everyone</h1>
+    
+<blockquote itemprop="description">Load Testing For Everyone</blockquote>
+
+<time class="post-time"><span class="icon">
+  <i class="fa fa-clock-o" aria-hidden="true"></i>
+</span>
+<span>7 minute read</span>
+<span class="icon">
+ <i class="fa fa-pencil" aria-hidden="true"></i>
+</span>
+
+  Published: <time datetime="2019-06-08T13:32:44&#43;01:00">8 Jun, 2019</time>
+
+</time>
+</div>
+<div id="post-box">
+<div id="post" itemprop="articleBody">
+    
+    
+
+<h2 id="what-is-load-testing">What is load testing?</h2>
+
+<p>From the <a href="https://en.wikipedia.org/wiki/Load_testing">wikipedia</a>, we have one definition of:
+<code>Load testing is the process of putting demand on a system and measuring its response.</code></p>
+
+<p>This is a pretty straight forward and simple way of putting it, but I like it - throw some load at a service and see what happens. Specifically, when we&rsquo;re talking about load testing HTTP services, some of the things we are looking for are;</p>
+
+<ol>
+<li>What are the limits of this system, or where does the system start to degrade in performance? (this could mean anything from increased latency to completely failed requests).</li>
+<li>What monitors do we need in place so we can be alerted when we approach our limits? (This can include autoscaling thresholds, as we tend to prefer building horizontally scalable systems that ideally can scale without humans being involved).</li>
+<li>How does the system perform with sustained load over a longer period of time? (These are often the most frustrating issues to track down as they can be non-deterministic or only show themselves in specific environments).</li>
+</ol>
+
+<p>Based on the definition provided above, load testing is quite generic. Depending on what your goals are, you might want to try something like <a href="https://www.guru99.com/stress-testing-tutorial.html">stress testing</a> or <a href="https://www.guru99.com/benchmark-testing.html">benchmarking</a>.</p>
+
+<h2 id="why-we-need-it">Why we need it</h2>
+
+<p>I work as a software engineer at <a href="https://deliveroo.co.uk/">Deliveroo</a> on the restaurants data team. The company has been growing a lot over the past few years and this means our systems are continually playing keep-up with our traffic. This poses a challenge for building systems that will be able to keep up with future traffic. We can&rsquo;t always accurately predict the expected traffic years out, so when building new systems, we try to take the most conservative approach - build the system for an order of magnitude higher expected traffic. We&rsquo;ve recently been writing a lot of our new systems in <a href="https://golang.org/">Go</a> (previously, we had been writing a lot of Ruby). While we know that Go is significantly more performant than Ruby, we still need a way to verify that our new systems will scale as we expect.</p>
+
+<p>We&rsquo;d like to have a solution that makes load testing easy on our engineers. We want to remove adhoc load testing solutions and provide a single tool that hopefully supports the use cases of everyones load testing needs.</p>
+
+<p>Some requirements of the system we needed to build:
+* Run within our VPC in AWS.
+* Support longevity load tests that run overnight or over the course of multiple days.
+* Support custom request bodies with potentially randomly generated values to support a wide range of requests and use cases.
+* Allow an engineer to specify the peak Requests Per Second and Duration of the load test and group them together to simulate realistic customer traffic (i.e. 200RPS total for 10 minutes, 50% <code>GET</code> requests to <code>/foo</code>, 30% <code>POST</code> requests to <code>/foo</code>, and the remainder <code>PUT</code> requests to <code>/foo/&lt;randomInt&gt;</code>).
+* Support a realistic traffic pattern that our systems tend to experience (we typically have a lunch-time peak followed by an even higher dinner peak).</p>
+
+<h2 id="making-load-testing-easy">Making Load Testing easy</h2>
+
+<p>Introducing <a href="https://en.wikipedia.org/wiki/Mj%C3%B6lnir">Mjölnir</a> - for those that are interested in Norse mythology (or MCU) you might recognize the name. Mjölnir is the name of our load generation service internally because it&rsquo;s meant to Hammer your service.</p>
+
+<p>It&rsquo;s implemented using <a href="https://github.com/tsenart/vegeta">Vegeta</a>, an open source tool written in Go for generating load. While Vegeta can be used as a powerful command line utility for load testing, we needed something more customizable, so we opted to use Vegeta as a library and build a system around it to enable any engineer to perform load testing of their services in a repeatable and replay-able way and scale to the amount of requests needed to accurately simulate real customer traffic.</p>
+
+<p>There were several challenges involved in building a load testing tool to enable our engineers to perform their own load testing:
+1. Vegeta doesn&rsquo;t support a distributed environment as there is no orchestration built into it to support this.
+2. When we started, Vegeta only support a constant request rate. Luckily for us, they&rsquo;ve recently added support for a <a href="https://github.com/tsenart/vegeta/pull/400">Sine Pacer</a> to simulate traffic following a sinusoidal function, which couldn&rsquo;t have come at a more opportune moment.
+3. We need a way to allow engineers to define load tests that can be replayed in the future.
+4. We need a way for engineers to get the output of their load tests that Vegeta generates so they can perform some analysis.</p>
+
+<p>Our system roughly looks like the following:</p>
+
+<p><img src="/img/mjolnir.png" alt="Architecture" /></p>
+
+<p>In the diagram I&rsquo;ve separated out the logical processes of the system, but in reality, a single process is running all of the functionalities at the same time.</p>
+
+<p>We run the Control Plane as a Goroutine in each process, and we run multiple Workers as Goroutines on the same process as well. We haven&rsquo;t had a need to physically separate these different tasks, as the API and the Control Plane are using very minimal amounts of resources. Having said that, they are designed such that they are independent and there is no IPC coordination between them - they can be separated and the system require no changes.</p>
+
+<p>The Workers are the biggest resources hogs in the system, as they are strictly generating as much load as is requested by the Load Tests. They are network and memory constrained typically, so we&rsquo;ve tuned our system to allow us to use the maximum number of file descriptors for opening ports and bumped the memory on the system to accommodate thousands of Requests Per Second on each instance.</p>
+
+<p>The most interesting piece in the system is the <code>Control Plane</code>. The Control Plane is responsible for scheduling the Load Tests onto Workers. It is running a loop that queries the Database for the current state of the Load Tests and takes action if needed - for example, launching a Load Test in a Goroutine or canceling a Load Test if the user has requested that a Load Test be cancelled.</p>
+
+<p>With this architecture, we can horizontally scale the number of processes we are running and the Load Tests will be optimistically scheduled by each Control Plane process that attempts to claim a Load Test.</p>
+
+<p>You can create a Load Test through the API, but we&rsquo;ve recently added a beautiful UI to allow anyone to browse for previously created Load Tests against their services, create new ones or clone existing Load Tests for easy replay-ability and track the progress of their Load Tests.</p>
+
+<p>We allow users to enter their request bodies with a minimal DSL that supports generating data at request time so each request is different. For example, you might tell Mjölnir that your request body should look like:</p>
+
+<pre><code>{
+    id: &lt;randomInt&gt;
+    city: &lt;randomCity&gt;
+    name: &lt;randomName&gt;
+}
+
+</code></pre>
+
+<p>and at the time of sending the request we will generate the appropriate random data. This was a commonly requested feature to get around a lot of use cases where perhaps the <code>name</code> field is a unique constraint in a database and so all subsequent requests in the Load Tests were not able to accurately perform the workflow of inserting a new item in their database.</p>
+
+<h2 id="next-steps">Next Steps</h2>
+
+<p>We now have a system that makes load testing incredibly easy. This helps gives confidence to our engineers performing system or software upgrades (like database versions, Go versions, or libraries) or creating new systems/features. We give them the power to perform these load tests themselves in a central place so they can benefit from the experience and work of those that did similarly before them.</p>
+
+<p>There is still plenty of work that we&rsquo;d like to do to make Mjölnir a more useful tool;</p>
+
+<ol>
+<li>We need to instrument (and load test!) Mjölnir itself so we know it&rsquo;s health and have confidence that the Load Tests we are running are actually running as expected.</li>
+<li>We want to add some more intelligence to the Control Plane so that it will only schedule Load Tests if there is enough capacity to actually reach the desired throughput of that Load Test.</li>
+<li>We want to be given a traffic profile from our production service and generate load based on the kind of traffic it received during this time window. This would help replicate incident scenarios and allow our engineers to debug in our staging environment to build confidence before shipping their fixes to production.</li>
+</ol>
+
+<p>If you have any thoughts, ideas, opinions on load testing or things we can improve on, you can reach out to me on <a href="https://twitter.com/mitchfriedman5">twitter</a>.</p>
+
+
+</div>
+    <div class="">
+        <p>
+  Published
+  
+    
+      by <span itemprop="author">Mitchell Friedman</span>
+    
+  
+  <time datetime="2019-06-08T13:32:44&#43;01:00">
+    8 Jun, 2019
+  </time>
+  
+    in <span itemprop="articleSection"><a href="/categories/programming/">programming</a></span>
+  
+  
+    and tagged <a href="/tags/go/">go</a>, <a href="/tags/load-testing/">load testing</a>, <a href="/tags/reliability/">reliability</a>, <a href="/tags/scalability/">scalability</a> and <a href="/tags/vegeta/">vegeta</a>
+  
+  using <span itemprop="wordCount">1415</span> words.
+</p>
+
+        
+  
+
+
+
+  <aside>
+    <heade><strong>Related Content</strong></header>
+    <hr>
+    <ul>
+      
+      
+        <li><a href="/blog/json-schema/">JSON Schema</a> &ndash; 5 minutes
+      
+    </ul>
+  </aside>
+
+
+    </div>
+    
+    
+    
+</div>
+</div>
+</main>
+  <footer>   <footer id="footer">
+    <nav>
+      <ul>
+        <li><span>Kube</span></li>
+        <li>
+          <a href="/blog/">Blog</a>
+        </li>
+        <li>
+          <a href="https://twitter.com/mitchfriedman5">Twitter</a>
+        </li>
+      </ul>
+    </nav>
+    <p>&copy; Licence MIT.</p>
+  </footer> </footer>
+
+
+  <script src="/js/kube.js" type="text/javascript">
+  </script>
+  <script src="/js/kube.legenda.js" type="text/javascript">
+  </script>
+  <script src="/js/master.js" type="text/javascript">
+  </script>
+</body>
+
+</html>

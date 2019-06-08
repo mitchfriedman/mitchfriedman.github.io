@@ -6,10 +6,20 @@
     <description>Recent content in Blogs on Mitchell Friedman</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 19 May 2019 16:20:00 +0100</lastBuildDate>
+    <lastBuildDate>Sat, 08 Jun 2019 13:32:44 +0100</lastBuildDate>
     
 	<atom:link href="/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Load Testing For Everyone</title>
+      <link>/blog/load-generator/</link>
+      <pubDate>Sat, 08 Jun 2019 13:32:44 +0100</pubDate>
+      
+      <guid>/blog/load-generator/</guid>
+      <description>What is load testing? From the wikipedia, we have one definition of: Load testing is the process of putting demand on a system and measuring its response.
+This is a pretty straight forward and simple way of putting it, but I like it - throw some load at a service and see what happens. Specifically, when we&amp;rsquo;re talking about load testing HTTP services, some of the things we are looking for are;</description>
+    </item>
     
     <item>
       <title>JSON Schema</title>
