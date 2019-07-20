@@ -98,7 +98,7 @@
 
 <meta itemprop="datePublished" content="2019-05-19T16:20:00&#43;01:00" />
 <meta itemprop="dateModified" content="2019-05-19T16:20:00&#43;01:00" />
-<meta itemprop="wordCount" content="971">
+<meta itemprop="wordCount" content="1147">
 
 
 
@@ -112,7 +112,7 @@
 <time class="post-time"><span class="icon">
   <i class="fa fa-clock-o" aria-hidden="true"></i>
 </span>
-<span>5 minute read</span>
+<span>6 minute read</span>
 <span class="icon">
  <i class="fa fa-pencil" aria-hidden="true"></i>
 </span>
@@ -128,31 +128,47 @@
 
 <h2 id="json-schema-go-apis">JSON Schema + Go + APIs</h2>
 
-<p>After working on a few Go HTTP servers i&rsquo;ve noticed
-a few different patterns for API validations. I&rsquo;m going to attempt to show off <em>yet another</em>
-way this can be done and hopefully convince you to try out <a href="https://json-schema.org/">JSON Schema</a>.</p>
+<h3 id="api-validation">API Validation</h3>
+
+<p>After working on a few Go HTTP servers (particularly JSON) i&rsquo;ve noticed a few different patterns for validating API bodies.</p>
+
+<p>JSON is an unstructured language that is commonly used for micro-services to communicate with each other. One of the big advantages to using something like JSON is that either the server or the client the transport data without any prior syncronization. On the other hand, one of the big pitfalls to using something like JSON is that either the server or the client can change the transport data without any prior syncronization. This ease of modification of the data being sent over the wire is a double edged sword.</p>
+
+<p>As a developer of a server, you need to make sure that your system will be able to handle any input provided by a client - especially one that is misbehaving.</p>
+
+<p>In some way or another, you will need to do validation of the requests being received by the server to ensure that the required parameters are present and they are the correct types that the server is expecting.</p>
+
+<p>I&rsquo;m going to attempt to show off <em>yet another</em> way this can be done and hopefully convince you to try out <a href="https://json-schema.org/">JSON Schema</a>.</p>
 
 <h3 id="what-is-json-schema">What is JSON Schema?</h3>
 
-<p>If you haven&rsquo;t heard of JSON Schema before, it&rsquo;s an attempt to apply structure to otherwise unstructured JSON.
-As developers, sometimes &ldquo;unstructured&rdquo; JSON is incredibly convenient (looking at you <a href="https://www.postgresql.org/docs/9.4/datatype-json.html">postgres</a>),
-but at some point in the lifecycle of that data, you will need to perform some validation on it. Whether that is checking if a certain field is present, the type of that field, if it&rsquo;s an integer between 1 and 10 exclusive, or something else.
-This is where JSON Schema comes in.</p>
+<p>If you haven&rsquo;t heard of JSON Schema before, it&rsquo;s an attempt to apply structure to otherwise unstructured JSON.</p>
 
-<h3 id="what-can-i-do-with-json-schema">What can I do with JSON Schema?</h3>
+<p>As developers, sometimes &ldquo;unstructured&rdquo; JSON is incredibly convenient (looking at you <a href="https://www.postgresql.org/docs/9.4/datatype-json.html">postgres</a>), but at some point in the lifecycle of that data, you will need to perform some validation on it. Whether that is checking if a certain field is present, the type of that field, if it&rsquo;s an integer between 1 and 10 exclusive, or something else.</p>
 
-<p>Just about any data validations on each individual field. For example, you can validate:
-* a field is an integer
-* that integer is in the range [1-10)
-* that field is present because it is <em>required</em>
-* a field called &ldquo;email&rdquo; matches an email validation <em>regex</em>
-* a field is a valid enum type</p>
+<p>This is where JSON Schema comes in.</p>
+
+<h3 id="what-can-you-do-with-json-schema">What can you do with JSON Schema?</h3>
+
+<p>Just about any data validations on each individual field. For example, you can validate:</p>
+
+<ul>
+<li><p>a field is an integer</p></li>
+
+<li><p>that integer is in the range [1-10)</p></li>
+
+<li><p>that field is present because it is <em>required</em></p></li>
+
+<li><p>a field called &ldquo;email&rdquo; matches an email validation <em>regex</em></p></li>
+
+<li><p>a field is a valid enum type</p></li>
+</ul>
 
 <p>and much more (seriously, validate <em><a href="http://json-schema.org/latest/json-schema-validation.html#rfc.section.6">all the things</a>)</em>.</p>
 
 <h3 id="how-can-i-have-some">How can I have some?</h3>
 
-<p>Now that i&rsquo;ve convinced you it&rsquo;s worth learning more about, let&rsquo;s dive into how we can add JSON Schema to a Go project.</p>
+<p>Now that I&rsquo;ve convinced you it&rsquo;s worth learning more about, let&rsquo;s dive into how we can add JSON Schema to a Go project.</p>
 
 <p>One great feature of JSON Schema is that you can add validation to an existing project that using some implicit (or explicit) schema with no changes required.</p>
 
@@ -167,57 +183,55 @@ This is where JSON Schema comes in.</p>
 <p>In our blog website, we accept 7 <code>POST</code> parameters (or, in JSON Schema, <code>properties</code>), and some of them have validations. Our schema looks like:</p>
 
 <pre><code class="language-json">{
-  &quot;$schema&quot;: &quot;http://json-schema.org/draft-04/schema#&quot;,
-  &quot;type&quot;: &quot;object&quot;,
-  &quot;title&quot;: &quot;post&quot;,
-  &quot;description&quot;: &quot;a blog post&quot;,
-  &quot;properties&quot;: {
-    &quot;title&quot;: {
-      &quot;type&quot;: &quot;string&quot;,
-      &quot;minLength&quot;: 1,
-      &quot;maxLength&quot;: 50,
-      &quot;pattern&quot;: &quot;^[A-Z].*&quot;
-    },
-    &quot;date&quot;: {
-      &quot;type&quot;: &quot;string&quot;
-    },
-    &quot;body&quot;: {
-      &quot;type&quot;: &quot;string&quot;
-    },
-    &quot;views&quot;: {
-      &quot;type&quot;: &quot;integer&quot;,
-      &quot;minimum&quot;: 1
-    },
-    &quot;post_type&quot;: {
-      &quot;type&quot;: &quot;string&quot;,
-      &quot;enum&quot;: [&quot;cross-post&quot;, &quot;original&quot;]
-    },
-    &quot;tags&quot;: {
-      &quot;type&quot;: &quot;array&quot;,
-      &quot;items&quot;: {
-        &quot;type&quot;: &quot;string&quot;
-      }
-    }
-  },
-  &quot;required&quot;: [&quot;title&quot;, &quot;date&quot;, &quot;body&quot;, &quot;post_type&quot;]
+	&quot;$schema&quot;: &quot;http://json-schema.org/draft-04/schema#&quot;,
+	&quot;type&quot;: &quot;object&quot;,
+	&quot;title&quot;: &quot;post&quot;,
+	&quot;description&quot;: &quot;a blog post&quot;,
+	&quot;properties&quot;: {
+		&quot;title&quot;: {
+			&quot;type&quot;: &quot;string&quot;,
+			&quot;minLength&quot;: 1,
+			&quot;maxLength&quot;: 50,
+			&quot;pattern&quot;: &quot;^[A-Z].*&quot;
+		},
+		&quot;date&quot;: {
+			&quot;type&quot;: &quot;string&quot;
+		},
+		&quot;body&quot;: {
+			&quot;type&quot;: &quot;string&quot;
+		},
+		&quot;views&quot;: {
+			&quot;type&quot;: &quot;integer&quot;,
+			&quot;minimum&quot;: 1
+		},
+		&quot;post_type&quot;: {
+			&quot;type&quot;: &quot;string&quot;,
+			&quot;enum&quot;: [&quot;cross-post&quot;, &quot;original&quot;]
+		},
+		&quot;tags&quot;: {
+			&quot;type&quot;: &quot;array&quot;,
+			&quot;items&quot;: {
+				&quot;type&quot;: &quot;string&quot;
+			}
+		}
+	},
+	&quot;required&quot;: [&quot;title&quot;, &quot;date&quot;, &quot;body&quot;, &quot;post_type&quot;]
 }
 </code></pre>
 
 <p>In our schema, we define 4 of these properties to be required, and we apply validations to all of them - some more strict than others.</p>
 
-<p>For example, I want to make sure the <code>title</code> field starts with a capital letter, and the number of views of this post obviously can&rsquo;t go below <code>1</code>.</p>
+<p>For example, I want to make sure the <code>title</code> field starts with a capital letter and ensure the number of views of this post stay above <code>1</code>.</p>
 
-<p>This is clearly a contrived example, but you can probably see how useful this would be to enforce at the API layer in your application
-and in a standard way for all your APIs. Add a new field to the API? Add <em>some</em> validation so you can enforce that
-your application can handle whatever the client throws at you.</p>
+<p>This is a contrived example, but you can probably see how useful this would be to enforce at the API layer in your application and in a standard way for all your APIs. Add a new field to the API? Add <em>some</em> validation so you can enforce that your application can handle whatever the client throws at you.</p>
 
 <h4 id="loading-our-schema">Loading our Schema</h4>
 
 <p>Now that we have written out our schema, we need to load our schema so we can use it to verify the <code>POST</code> body on every request.</p>
 
-<p>I&rsquo;ve chosen to check my schema into my project as a go string literal, but there are other ways to do this as well (gojsonschema <a href="https://github.com/xeipuuv/gojsonschema#loaders">supports a static file on disk, Web/HTTP references, or custom Go types</a>).</p>
+<p>One way to actually define the JSON schema is to use a string literal, but there are other ways to do this as well (<a href="https://github.com/xeipuuv/gojsonschema#loaders">gojsonschema supports a static file on disk, Web/HTTP references, or custom Go types</a>).</p>
 
-<p>I can then load my schema with:</p>
+<p>The schema can then be loaded with:</p>
 
 <pre><code class="language-go">func loadSchema() (*gojsonschema.Schema, error) {
 	loader := gojsonschema.NewStringLoader(schemaJSON)
@@ -225,17 +239,17 @@ your application can handle whatever the client throws at you.</p>
 	if err != nil {
 		return nil, err
 	}
-
 	return schema, nil
 }
 </code></pre>
 
 <h4 id="decorate-a-handler">Decorate a Handler</h4>
 
-<p>I tend to decorate my <code>http.Handler</code>s with middleware so I can use do this schema validation in a single place.
-I wrote an <code>http.Handler</code> that looks like this:</p>
+<p>I tend to decorate my <code>http.Handler</code>s with middleware (other <code>http.Handler</code>s) so you can do this schema validation in a single, consistent way.</p>
 
-<pre><code class="language-go">func validate(schema *gojsonschema.Schema, next http.HandlerFunc) http.HandlerFuc {
+<p>That handler looks something like this:</p>
+
+<pre><code class="language-go">func validate(schema *gojsonschema.Schema, next http.HandlerFunc) http.HandlerFunc {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		body, err := ioutil.ReadAll(r.Body)
 		defer r.Body.Close()
@@ -244,22 +258,18 @@ I wrote an <code>http.Handler</code> that looks like this:</p>
 			w.WriteHeader(http.StatusInternalServerError)
 			return
 		}
-
 		requestJSON := gojsonschema.NewBytesLoader(body)
 		result, err := schema.Validate(requestJSON)
-
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 			return
 		}
-
 		if !result.Valid() {
 			if err := writeError(result.Errors(), w); err != nil {
 				w.WriteHeader(http.StatusInternalServerError)
 				return
 			}
 		}
-
 		next.ServeHTTP(w, r)
 	})
 }
@@ -267,14 +277,13 @@ I wrote an <code>http.Handler</code> that looks like this:</p>
 
 <p>I won&rsquo;t go into too much detail about the closure, but if you are interested in learning more about writing HTTP servers + go, I highly recommend <a href="https://medium.com/statuscode/how-i-write-go-http-services-after-seven-years-37c208122831">this</a> blog post from Mat Ryer.</p>
 
-<p>This is where all the validation comes into play - with my loaded <code>schema</code> from the step before,
-we can simple do a <code>schema.Validate(requestJSON)</code>, and pass in a <code>JSONLoader</code>.
-If the JSON body is invalid, we will see <code>result.Valid()</code> is <code>false</code> and we can check each
-of the errors in <code>result.Errors()</code>.</p>
+<p>This is where all the validation comes into play - with your loaded <code>schema</code> from the step before, you can simply do a <code>schema.Validate(requestJSON)</code>, and pass in a <code>JSONLoader</code>.</p>
+
+<p>If the JSON body is invalid, you will see <code>result.Valid()</code> is <code>false</code> and you can check each of the errors in <code>result.Errors()</code>.</p>
 
 <h4 id="wire-everything-up">Wire everything up</h4>
 
-<p>I have another handler to actually perform the request logic that looks like this:</p>
+<p>All you need now is another handler to actually perform the request logic that we can decorate:</p>
 
 <pre><code class="language-go">func process(w http.ResponseWriter, _ *http.Request) {
 	w.WriteHeader(http.StatusOK)
@@ -282,26 +291,29 @@ of the errors in <code>result.Errors()</code>.</p>
 }
 </code></pre>
 
-<p>In the <code>main</code> function, all we need is to decorate our <code>http.Handler</code> and begin our <code>http.Server</code>:</p>
+<p>In the <code>main</code> function, all you need is to decorate our <code>http.Handler</code> and begin our <code>http.Server</code>:</p>
 
-<p>And voila - just like that, we have a middleware that will validate JSON payloads based
-on a provided JSON Schema document. For each handler we want to register, we just need to
-provide the schema and all errors in validation will be caught in a consistent approach.</p>
-
-<pre><code class="language-go">handler := validate(schema, process)
-http.ListenAndServe(&quot;:8000&quot;, handler)
+<pre><code class="language-go">func  main()  {
+	schema,  err  :=  loadSchema()
+	if  err  !=  nil  {
+		panic(fmt.Sprintf(&quot;failed  to  load  schema.json:  %v&quot;,  err))
+	}
+	handler := validate(schema,  process)
+	http.ListenAndServe(&quot;:8000&quot;,  handler)
+}
 </code></pre>
+
+<p>And voila - just like that, you have a middleware that will validate JSON payloads based on a provided JSON Schema document. For each handler you want to register, we just need to provide the schema and all errors in validation will be caught in a consistent approach.</p>
 
 <h4 id="conclusion">Conclusion</h4>
 
-<p>JSON Schema is simple to use but quite powerful. It allows us to enforce the data transferred to/from APIs in a
-generic way that is self documenting and can be easily adding on to any existing project.</p>
+<p>JSON Schema is simple to use but quite powerful. It allows you to enforce the data transferred to/from APIs in a generic way that is self documenting and can be easily adding on to any existing project.</p>
 
-<p>I hope i&rsquo;ve convinced you to try JSON Schema in your next project that uses JSON.</p>
+<p>I hope I&rsquo;ve convinced you to try JSON Schema in your next project that uses JSON.</p>
 
 <p>You can check out the full source code <a href="https://github.com/mitchfriedman/schema-validations">here</a>.</p>
 
-<p>If you have thoughts or disagree with some things I&rsquo;ve said here, reach out to me on <a href="https://twitter.com/mitchfriedman5">twitter</a>.</p>
+<p>If you have thoughts on anything I&rsquo;ve written here, reach out to me on <a href="https://twitter.com/mitchfriedman5">twitter</a>.</p>
 
 
 </div>
@@ -322,7 +334,7 @@ generic way that is self documenting and can be easily adding on to any existing
   
     and tagged <a href="/tags/go/">go</a>, <a href="/tags/http/">http</a> and <a href="/tags/server/">server</a>
   
-  using <span itemprop="wordCount">971</span> words.
+  using <span itemprop="wordCount">1147</span> words.
 </p>
 
         

@@ -28,8 +28,8 @@
       <pubDate>Sun, 19 May 2019 16:20:00 +0100</pubDate>
       
       <guid>/blog/json-schema/</guid>
-      <description>JSON Schema + Go + APIs After working on a few Go HTTP servers i&amp;rsquo;ve noticed a few different patterns for API validations. I&amp;rsquo;m going to attempt to show off yet another way this can be done and hopefully convince you to try out JSON Schema.
-What is JSON Schema? If you haven&amp;rsquo;t heard of JSON Schema before, it&amp;rsquo;s an attempt to apply structure to otherwise unstructured JSON. As developers, sometimes &amp;ldquo;unstructured&amp;rdquo; JSON is incredibly convenient (looking at you postgres), but at some point in the lifecycle of that data, you will need to perform some validation on it.</description>
+      <description>JSON Schema + Go + APIs API Validation After working on a few Go HTTP servers (particularly JSON) i&amp;rsquo;ve noticed a few different patterns for validating API bodies.
+JSON is an unstructured language that is commonly used for micro-services to communicate with each other. One of the big advantages to using something like JSON is that either the server or the client the transport data without any prior syncronization. On the other hand, one of the big pitfalls to using something like JSON is that either the server or the client can change the transport data without any prior syncronization.</description>
     </item>
     
   </channel>
